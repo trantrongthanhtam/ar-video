@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  </head>
+  <body>
+    <a-scene mindar-image="imageTargetSrc: ./targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      
+      <a-assets>
+        <video id="paint-video" src="./Nhin-lai-2025.mp4" preload="auto" loop="true"></video>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-video src="#paint-video" width="1" height="0.5625" position="0 0 0" rotation="0 0 0"></a-video>
+      </a-entity>
+      
+    </a-scene>
+
+    <script>
+      // Video thường bị trình duyệt chặn tự động phát, cần click vào màn hình để bắt đầu
+      const video = document.querySelector("#paint-video");
+      const sceneEl = document.querySelector('a-scene');
+      
+      sceneEl.addEventListener("targetFound", () => {
+        video.play().catch(error => {
+            console.log("Video chưa sẵn sàng hoặc bị chặn:", error);
+        });
+    });
+
+      sceneEl.addEventListener("targetLost", event => {
+        video.pause();
+      });
+    </script>
+  </body>
+</html>
