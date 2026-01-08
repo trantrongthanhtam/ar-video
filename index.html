@@ -13,7 +13,7 @@
 
         <a-assets>
             <video id="paint-video" src="./Nhin-Lai-2025-optimized.mp4" preload="auto" loop="true" playsinline
-                webkit-playsinline muted></video>
+                webkit-playsinline></video>
         </a-assets>
 
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -30,7 +30,7 @@
         const sceneEl = document.querySelector('a-scene');
 
         // Cố gắng phát video ngay khi tải trang (muted cho phép autoplay trên hầu hết trình duyệt)
-        video.muted = true;
+        // video.muted = true;
         video.play().catch(() => {
             // Nếu vẫn bị chặn, yêu cầu người dùng tương tác
             const unlock = () => {
